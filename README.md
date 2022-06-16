@@ -33,7 +33,8 @@ $ npm install
 ```
 $ cp .env.example .env
 ```
-
+$ cp .env.example .env
+```
 ## Running the app
 
 ```bash
@@ -46,8 +47,26 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
-
-## Migration data
-
 ```
+
+## Init data MongoDb
+mongo wallet migration.js
+
 # mini-wallet
+```
+#Initialize my account for wallet 
+
+Req: 
+url : http://localhost:3000/api/v1/init
+data : {
+    "customerXid" : "34eaffd"
+}
+
+Response:
+{
+    "data": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lclhpZCI6eyJjdXN0b21lclhpZCI6IjM0ZWFmZmQifSwiaWF0IjoxNjU1NDIzNjkxLCJleHAiOjE2NTU0MjM4MTF9.3k8yAvhmTxgoAii_EKH3GI9ODJTBKBiN6zawUZJPgRo"
+    },
+    "status": "success"
+}
+```
