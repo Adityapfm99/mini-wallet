@@ -5,8 +5,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { WalletModule } from './wallet/wallet.module';
 import { DepositsModule } from './deposits/deposits.module';
-import { RegisterModule } from './register/register.module';
 import { WithdrawalsModule } from './withdrawals/withdrawals.module';
+import { RegisterModule } from './register/register.module';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
@@ -26,12 +26,9 @@ import { JwtModule } from '@nestjs/jwt';
     }),
     RegisterModule,
     WalletModule,
-    // CustomersModule,
-    JwtModule,
     DepositsModule,
-    // WithdrawalsModule,
-
-    // InitModule,
+    JwtModule,
+    WithdrawalsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

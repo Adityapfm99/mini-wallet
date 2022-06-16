@@ -12,7 +12,6 @@ import {
   Query,
 } from '@nestjs/common';
 import { InitService } from './init.service';
-import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { createInit } from '../init/dto/create-init.dto';
 

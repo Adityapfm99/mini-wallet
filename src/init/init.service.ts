@@ -3,7 +3,6 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { InitResponse } from './interfaces/init.interface';
 import { InitSchema } from './schemas/init.schema';
-import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 import { createInit } from './dto/create-init.dto';
 
 

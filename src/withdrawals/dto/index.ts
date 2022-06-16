@@ -1,2 +1,2 @@
-export * from './create-customer.dto';
-export * from './update-customer.dto';
+export * from './create-deposit.dto';
+export * from './update-deposit.dto';

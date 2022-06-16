@@ -6,12 +6,12 @@ import { DepositSchema, Deposit } from './schemas/deposit.schema';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 
-
 const jwtFactory = {
   useFactory: async (configService: ConfigService) => ({
-    secret: 'secret-key',
+    secret: 'aaaaaaaaa',
+    
     signOptions: {
-      expiresIn: 600000,
+      expiresIn: 3000,
     },
   }),
   inject: [ConfigService],

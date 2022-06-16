@@ -5,12 +5,23 @@ import {
   IsString,
   IsOptional,
   isNumber,
+  IsNumber,
 } from 'class-validator';
 
 export class CreateCustomerDto {
   @IsString()
   @IsNotEmpty()
   customerXid: string;
+
+}
+
+export class updateAmount {
+  @IsString()
+  @IsNotEmpty()
+  customerXid: string;
+  
+  @IsNumber()
+  amount: number
 
 }
 

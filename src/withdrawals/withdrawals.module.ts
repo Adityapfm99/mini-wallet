@@ -1,16 +1,30 @@
 import { Module } from '@nestjs/common';
-import { CustomersService } from './wallet.service';
-import { WithdrawalsController } from './withdrawals.controller';
+import { WithdrawalsService } from './withdrawals.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DepositSchema, Deposit } from './schemas/deposit.schema';
+import { WithdrawalsController} from './withdrawals.controller';
+import { WithdrawalsSchema, Withdrawals } from './schemas/withdrawals.schema';
+import { ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
+
+const jwtFactory = {
+  useFactory: async (configService: ConfigService) => ({
+    secret: 'aaaaaaaaa',
+    
+    signOptions: {
+      expiresIn: 3000,
+    },
+  }),
+  inject: [ConfigService],
+};
 
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: Deposit.name, schema: DepositSchema },
+      { name: Withdrawals.name, schema: WithdrawalsSchema },
     ]),
+    JwtModule.registerAsync(jwtFactory),
   ],
-  providers: [CustomersService],
+  providers: [WithdrawalsService],
   controllers: [WithdrawalsController],
 })
 export class WithdrawalsModule {}

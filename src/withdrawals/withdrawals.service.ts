@@ -3,28 +3,26 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import moment = require('moment');
 import {  CreateDepositDto } from './dto';;
-import { Deposit } from './schemas/deposit.schema';
+import { Withdrawals } from './schemas/withdrawals.schema';
 import { v4 as uuidv4 } from 'uuid';
-import { Wallet } from '../wallet/schemas/wallet.schema';
 
 @Injectable()
-export class DepositService {
+export class WithdrawalsService {
   constructor(
-    @InjectModel(Deposit.name) 
-    private readonly depositModel: Model<Deposit>,
+    @InjectModel(Withdrawals.name) 
+    private readonly withdrawalsModel: Model<Withdrawals>,
 
-    // private readonly walletModel: Model<Wallet>,
     
   ) {}
 
-  public async createDeposits(
+  public async createWithdrawn(
     payload: CreateDepositDto,
     customerId: string,
   ): Promise<any> {
     const currDate = new Date();
     const now = moment(currDate).local().format('YYYY-MM-DD HH:mm:ss');
    
-    const findRef = await this.depositModel.findOne(
+    const findRef = await this.withdrawalsModel.findOne(
       { referenceId: payload.referenceId },
     );
     if (findRef) {
@@ -34,11 +32,11 @@ export class DepositService {
       id:  uuidv4(),
       status: 'success',
       amount: payload.amount,
-      depositedAt: now,
+      withdrawnAt: now,
       referenceId: payload.referenceId,
-      depositedBy: customerId,
+      withdrawnBy: customerId,
     }
-    const createDeposits = await this.depositModel.create(
+    const createDeposits = await this.withdrawalsModel.create(
       input,
     );
 
@@ -49,13 +47,13 @@ export class DepositService {
     return createDeposits;
   }
 
-  public async findDeposit(
+  public async findWithdrawals(
     referenceId: string,
   ): Promise<any> {
     const currDate = new Date();
     const now = moment(currDate).local().format('YYYY-MM-DD HH:mm:ss');
    
-    const findRef = await this.depositModel.findOne(
+    const findRef = await this.withdrawalsModel.findOne(
       { referenceId: referenceId },
     );
   

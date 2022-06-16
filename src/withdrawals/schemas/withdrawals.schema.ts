@@ -2,18 +2,18 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
 @Schema()
-export class Deposit extends Document {
+export class Withdrawals extends Document {
   @Prop()
   id: string;
 
   @Prop({ unique: true })
-  depositedBy: string;
+  withdrawnBy: string;
 
   @Prop()
   status: string;
 
   @Prop()
-  depositedAt: string;
+  withdrawnAt: string;
 
   @Prop()
   amount: number;
@@ -23,4 +23,4 @@ export class Deposit extends Document {
 
 }
 
-export const DepositSchema = SchemaFactory.createForClass(Deposit);
+export const WithdrawalsSchema = SchemaFactory.createForClass(Withdrawals);

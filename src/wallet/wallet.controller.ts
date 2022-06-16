@@ -14,6 +14,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { disableDto } from '../register/dto';
+import { updateAmount } from './dto';
 
 @ApiTags('Wallet')
 @Controller('v1/wallet')
@@ -189,4 +190,22 @@ export class WalletController {
     }
     return isValid;
   }
+  
+  @Post('insert-amount')
+  async updateAmount(
+   @Body() payload: updateAmount): Promise<any> {
+    const insertAmount = await this.walletService.insertAmount(payload);
+
+    return insertAmount;
+  }
+
+  @Post('deduct-amount')
+  async deuctAmount(
+   @Body() payload: updateAmount): Promise<any> {
+    const deductAmount = await this.walletService.deductAmount(payload);
+
+    return deductAmount;
+  }
+
+
 }
