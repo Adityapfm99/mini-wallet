@@ -8,10 +8,10 @@ import { JwtModule } from '@nestjs/jwt';
 
 const jwtFactory = {
   useFactory: async (configService: ConfigService) => ({
-    secret: 'aaaaaaaaa',
+    secret: 'secret_key',
     
     signOptions: {
-      expiresIn: 3000,
+      expiresIn: 360,
     },
   }),
   inject: [ConfigService],

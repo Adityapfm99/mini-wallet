@@ -8,6 +8,7 @@ import {
   Patch,
   Get,
   Body,
+  Header,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
@@ -39,6 +40,7 @@ export class DepositsController {
     if (bearer === '') {
       throw new UnauthorizedException('No Token provided!');
     }
+    
     let createDeposit;
     const isValid = await this.isTokenValid(bearer);
     if (isValid) {
@@ -47,7 +49,7 @@ export class DepositsController {
         bearer,
         verifyOptions,
       );
-    
+
       const customerId = customerXid.customerXid.customerXid;
 
       createDeposit = await this.depositService.createDeposits(
@@ -57,31 +59,30 @@ export class DepositsController {
       // update amount to wallet
       const input = {
         customerXid: customerId,
-        amount: payload.amount
-      }
+        amount: payload.amount,
+      };
 
-      const data  = await axios({
+      const data = await axios({
         method: 'POST',
         url: `http://localhost:3000/api/v1/wallet/insert-amount`,
         data: input,
-    });
-    const result = await this.depositService.findDeposit(payload.referenceId)
-    const resp = {
-      status: "success",
-      data: {
-        deposit: {
-          id: result.id,
-          deposited_by: result.depositedBy,
-          status: "success",
-          deposited_at: result.depositedAt,
-          amount: payload.amount,
-          reference_id: payload.referenceId
-        }
-      }
-    }
-    
-    return resp; 
+      });
+      const result = await this.depositService.findDeposit(payload.referenceId);
+      const resp = {
+        status: 'success',
+        data: {
+          deposit: {
+            id: result.id,
+            deposited_by: result.depositedBy,
+            status: 'success',
+            deposited_at: result.depositedAt,
+            amount: payload.amount,
+            reference_id: payload.referenceId,
+          },
+        },
+      };
 
+      return resp;
     }
     if (!isValid) {
       throw new UnauthorizedException('Invalid Token!');
