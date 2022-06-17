@@ -32,9 +32,9 @@ or
 ```bash
 npm install
 ```
-## Set environment
+<!-- ## Set environment
 ```
-```
+``` -->
 ## Running the app
 
 ```bash
@@ -46,17 +46,27 @@ or
 npm start
 ```
 
-## Init data MongoDb
+## Init data MongoDb (mandatory)
+
 mongo wallet migration.js
 
+## Database
+
+We have 3 collections :
+
+- wallet  -- > this is main table
+- deposits --> transaction table
+- withdrawals --> transaction table
+
+If got transaction, Deposit / withdrawal, it  will update balance into main tble (wallet)
 ## mini-wallet
 
-Initialize my account for wallet 
+# Initialize my account for wallet 
 ```
 Request: 
 url : [GET] http://localhost:3000/api/v1/init
 data : {
-    "customerXid" : "kdwdda"
+    "customerXid" : "ea0212d3-abd6-406f-8c67-868e814a2436" // this copy from collection wallet customerXid
 }
 
 Response:
@@ -68,7 +78,7 @@ Response:
 }
 ```
 
-Enable my wallet
+# Enable my wallet
 ```
 Request: 
 url : [post] http://localhost:3000/api/v1/wallet
@@ -86,12 +96,12 @@ Response :
 
 ```
 
-View Wallet Balance
+# View Wallet Balance
 ```
 Request: 
 url : [GET] http://localhost:3000/api/v1/wallet
 headers : {
-    "Authorization" : "token"
+    "Authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lclhpZCI6eyJjdXN0b21lclhpZCI6IjM0ZWFmZmQifSwiaWF0IjoxNjU1NDIzNjkxLCJleHAiOjE2NTU0MjM4MTF9.3k8yAvhmTxgoAii_EKH3GI9ODJTBKBiN6zawUZJPgRo"
 }
 
 Response :
@@ -110,7 +120,7 @@ Response :
 
 ```
 
-Disable my Wallet 
+# Disable my Wallet 
 ```
 Request: 
 url : [PATCH] http://localhost:3000/api/v1/wallet
@@ -133,7 +143,7 @@ Response :
 }
 ```
 
-Add virtual account 
+# Add virtual account 
 ```
 Request: 
 url : [POST] http://localhost:3000/api/v1/wallet/deposits
@@ -158,7 +168,7 @@ Response :
 }
 ```
 
-withdrawn account 
+# Withdrawn account 
 ```
 Request: 
 url : [POST] http://localhost:3000/api/v1/wallet/withdrawals
@@ -180,5 +190,12 @@ Response :
             "reference_id": "440344do40hcb44e4929-0pc7-p04pa0492294"
         }
     }
+}
+
+Negatif case, if withdrawn greather than balance 
+
+Response : {
+    "status": "failed",
+    "message": "Your balance not enough"
 }
 ```
