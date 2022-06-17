@@ -54,7 +54,7 @@ mongo wallet migration.js
 Initialize my account for wallet 
 ```
 Request: 
-url : http://localhost:3000/api/v1/init
+url : [GET] http://localhost:3000/api/v1/init
 data : {
     "customerXid" : "kdwdda"
 }
@@ -69,9 +69,116 @@ Response:
 ```
 
 Enable my wallet
-
+```
 Request: 
-url : http://localhost:3000/api/v1/init
+url : [post] http://localhost:3000/api/v1/wallet
 headers : {
     "Authorization" : "token"
 }
+
+Response :
+{
+    "data": {
+        "tokent": "20f2a505-f536-4d1e-a7d3-b52c4708241a"
+    },
+    "status": "success"
+}
+
+```
+
+View Wallet Balance
+```
+Request: 
+url : [GET] http://localhost:3000/api/v1/wallet
+headers : {
+    "Authorization" : "token"
+}
+
+Response :
+{
+    "status": "success",
+    "data": {
+        "wallet": {
+            "id": "20f2a505-f536-4d1e-a7d3-b52c4708241a",
+            "ownedBy": "b7f0645c-7f8b-4588-af1e-1bec4633cc2b",
+            "status": "enable",
+            "enableAt": "2022-06-17 07:08:39",
+            "balance": 10621600
+        }
+    }
+}
+
+```
+
+Disable my Wallet 
+```
+Request: 
+url : [PATCH] http://localhost:3000/api/v1/wallet
+body : {
+    "isDisable": true
+}
+
+Response :
+{
+    "status": "disable set successfully",
+    "data": {
+        "wallet": {
+            "id": "20f2a505-f536-4d1e-a7d3-b52c4708241a",
+            "ownedBy": "b7f0645c-7f8b-4588-af1e-1bec4633cc2b",
+            "status": "disable",
+            "disableAt": "2022-06-17 06:12:34",
+            "balance": 10621600
+        }
+    }
+}
+```
+
+Add virtual account 
+```
+Request: 
+url : [POST] http://localhost:3000/api/v1/wallet/deposits
+body :{
+    "amount": 310800,
+    "referenceId": "440344do40khcb44e0929-0pc7-p03pa0492294"
+}
+
+Response :
+{
+    "status": "success",
+    "data": {
+        "deposit": {
+            "id": "dd87a70e-9589-476e-b3d4-3769ad8299a7",
+            "deposited_by": "ea0212d3-abd6-406f-8c67-868e814a2436",
+            "status": "success",
+            "deposited_at": "2022-06-17 01:54:01",
+            "amount": 310800,
+            "reference_id": "440344do40khcb44e0929-0pc7-p03pa0492294"
+        }
+    }
+}
+```
+
+withdrawn account 
+```
+Request: 
+url : [POST] http://localhost:3000/api/v1/wallet/withdrawals
+body :{
+    "amount": 310800,
+    "referenceId": "440344do40khcb44e0929-0pc7-p03pa0492294"
+}
+
+Response :
+{
+    "status": "success",
+    "data": {
+        "withdrawn": {
+            "id": "582701d4-3d08-4074-8513-dd94e30e4a93",
+            "withdrawn_by": "ea0212d3-abd6-406f-8c67-868e814a2436",
+            "status": "success",
+            "withdrawn_at": "2022-06-17 01:43:24",
+            "amount": 310800,
+            "reference_id": "440344do40hcb44e4929-0pc7-p04pa0492294"
+        }
+    }
+}
+```
