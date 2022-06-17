@@ -22,44 +22,41 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Installation 
 
 ```bash
-$ npm install
+$ yarn install
 ```
+or
 
+```bash
+npm install
+```
 ## Set environment
-
 ```
-$ cp .env.example .env
-```
-$ cp .env.example .env
 ```
 ## Running the app
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+$ yarn start
 ```
+or
+
+```bash
+npm start
 ```
 
 ## Init data MongoDb
 mongo wallet migration.js
 
-# mini-wallet
-```
-#Initialize my account for wallet 
+## mini-wallet
 
-Req: 
+Initialize my account for wallet 
+```
+Request: 
 url : http://localhost:3000/api/v1/init
 data : {
-    "customerXid" : "34eaffd"
+    "customerXid" : "kdwdda"
 }
 
 Response:
@@ -70,3 +67,11 @@ Response:
     "status": "success"
 }
 ```
+
+Enable my wallet
+
+Request: 
+url : http://localhost:3000/api/v1/init
+headers : {
+    "Authorization" : "token"
+}
