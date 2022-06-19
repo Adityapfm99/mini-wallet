@@ -91,7 +91,7 @@ export class DepositsController {
     if (createDeposit) {
       response = {
         data: {
-          tokent: createDeposit.id,
+          token: createDeposit.id,
         },
         status: 'success',
       };
